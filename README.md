@@ -23,10 +23,8 @@ Self-Driving Car Engineer Nanodegree Program
     cd uWebSockets
     git checkout e94b6e1
     ```
-    Some function signatures have changed in v0.14.x. See [this PR](https://github.com/udacity/CarND-MPC-Project/pull/3) for more details.
-* Simulator. You can download these from the [project intro page](https://github.com/udacity/self-driving-car-sim/releases) in the classroom.
-
-There's an experimental patch for windows in this [PR](https://github.com/udacity/CarND-PID-Control-Project/pull/3)
+    
+* Simulator, it can be downloaded from the [here](https://github.com/udacity/self-driving-car-sim/releases)
 
 ## Basic Build Instructions
 
@@ -35,64 +33,45 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 3. Compile: `cmake .. && make`
 4. Run it: `./pid`. 
 
-Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
-## Editor Settings
+## Rubric
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+### Compilation
+#### Your code should compile
+The code is compiled successfully without error.
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
+### Implementation
 
-## Code Style
+#### The PID procedure follows what was taught in the lessons
+PID values are calculated in UpdateError method line 25 to line 29 of PID.cpp. The steering angle calculation is based on total Error value that is calculated at line 34 of PID.cpp.
 
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+### Reflection
 
-## Project Instructions and Rubric
+#### Describe the effect each of the P, I, D components had in your implementation.
 
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
+The value of Proportional component will cause car to make extreme adjustment. At the straight road, this cause car run zig-zag. But low value of P will cause the car can't adjust steering angle at non-straight road in timely manner.
 
-More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/f1820894-8322-4bb3-81aa-b26b3c6dcbaf/lessons/e8235395-22dd-4b87-88e0-d108c5e5bbf4/concepts/6a4d8d42-6a04-4aa6-b284-1697c0fd6562)
-for instructions and the project rubric.
+[![P component](http://img.youtube.com/vi/qvq4YVBtXok/0.jpg)](http://www.youtube.com/watch?v=qvq4YVBtXok)
 
-## Hints!
+The value of Derivative component will cause more granular adjustment. Fitted value of this component will cause car runs smoothly, because of less extreme steering angle adjustment. 
 
-* You don't have to follow this directory structure, but if you do, your work
-  will span all of the .cpp files here. Keep an eye out for TODOs.
+[![D component](http://img.youtube.com/vi/W4mTvUIvT-s/0.jpg)](http://www.youtube.com/watch?v=W4mTvUIvT-s)
 
-## Call for IDE Profiles Pull Requests
 
-Help your fellow students!
+The value of I should make general adjustment based on overall error. At the implementation i have to set this value to very small this, because any big value more than 0.01 will cause the car to run zig-zag. Significant value of I component doesn't contribute to smoothing run. 
+ 
 
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
-that students don't feel pressured to use one IDE or another.
+#### Describe how the final hyperparameters were chosen
 
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
+Hyperparameters are choosen by manual tuning, by running simulation many times. I started with P component, from 0.1 to 1. Then followed by D component. For I component, initially i started, with value 0.1, but the simulation didn't run well. Then i decrease the I component value until almost reaching zero. 
 
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
+I did try Sebastian's twiddle algorithm, but i didn't manage to come up with working solution, and i have run out of time. 
 
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
+### Simulation
 
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
+#### The vehicle must successfully drive a lap around the track
+The car simulation runs without leaving drivable surface.
 
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make./
+[![Simulator Video](http://img.youtube.com/vi/lNjpbqzQtp8/0.jpg)](http://www.youtube.com/watch?v=lNjpbqzQtp8)
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
