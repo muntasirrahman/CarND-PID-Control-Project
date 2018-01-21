@@ -49,21 +49,20 @@ PID values are calculated in UpdateError method line 25 to line 29 of PID.cpp. T
 
 #### Describe the effect each of the P, I, D components had in your implementation.
 
-The value of Proportional component will cause car to make extreme adjustment. At the straight road, this cause car run zig-zag. But low value of P will cause the car can't adjust steering angle at non-straight road in timely manner.
+The value of Proportional coefficient will cause car to make significant adjustment. High value of this coefficient, cause car run zig-zag. But low value of P-coefficient cause the car can't make steering angle adjustment at curvy road in timely manner.
 
 [![P component](http://img.youtube.com/vi/qvq4YVBtXok/0.jpg)](http://www.youtube.com/watch?v=qvq4YVBtXok)
 
-The value of Derivative component will cause more granular adjustment. Fitted value of this component will cause car runs smoothly, because of less extreme steering angle adjustment. 
+The value of Derivative coefficient will cause more granular adjustment. Fitted value of this coefficient will make car runs smoothly, because of less extreme steering angle adjustment. 
 
 [![D component](http://img.youtube.com/vi/W4mTvUIvT-s/0.jpg)](http://www.youtube.com/watch?v=W4mTvUIvT-s)
 
-
-The value of I should make general adjustment based on overall error. At the implementation i have to set this value to very small this, because any big value more than 0.01 will cause the car to run zig-zag. Significant value of I component doesn't contribute to smoothing run. 
+The value of I should make general adjustment based on overall error. At the implementation i have to set this value to very small this, because any big value more than 0.01 will cause the car to run zig-zag. High value of I-coefficient doesn't contribute to smoothing run. 
  
 
 #### Describe how the final hyperparameters were chosen
 
-Hyperparameters are choosen by manual tuning, by running simulation many times. I started with P component, from 0.1 to 1. Then followed by D component. For I component, initially i started, with value 0.1, but the simulation didn't run well. Then i decrease the I component value until almost reaching zero. 
+Hyperparameters are chosen by manual tuning, by running simulation many times. I started with P-coefficient, from 0.1 to 1, gradually increase it by 0.1. For D-coefficient, i started from value 0.1 to 1, increased by 0.1, then later trying value from 1 to 5. For I-coefficient, initially i started, with value 0.1, but the simulation didn't run well. Then i decrease the I-coefficient value until almost reaching zero. 
 
 I did try Sebastian's twiddle algorithm, but i didn't manage to come up with working solution, and i have run out of time. 
 
