@@ -1,6 +1,12 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+
+The car simulation runs without leaving drivable surface, take a look here at youtube:
+
+[![Simulator Video](http://img.youtube.com/vi/lNjpbqzQtp8/0.jpg)](http://www.youtube.com/watch?v=lNjpbqzQtp8)
+
+
 ---
 
 ## Dependencies
@@ -65,12 +71,4 @@ The value of I should make general adjustment based on overall error. At the imp
 Hyperparameters are chosen by manual tuning, by running simulation many times. I started with P-coefficient, from 0.1 to 1, gradually increase it by 0.1. For D-coefficient, i started from value 0.1 to 1, increased by 0.1, then later trying value from 1 to 5. For I-coefficient, initially i started, with value 0.1, but the simulation didn't run well. Then i decrease the I-coefficient value until almost reaching zero. 
 
 I did try Sebastian's twiddle algorithm, but i didn't manage to come up with working solution, and i have run out of time. 
-
-### Simulation
-
-#### The vehicle must successfully drive a lap around the track
-The car simulation runs without leaving drivable surface.
-
-[![Simulator Video](http://img.youtube.com/vi/lNjpbqzQtp8/0.jpg)](http://www.youtube.com/watch?v=lNjpbqzQtp8)
-
 
